@@ -1,5 +1,9 @@
 package Genesys.CSVNameGenerator;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -18,8 +22,17 @@ public class AppTest extends TestCase {
 	}
 
 	public void testApp() {
+		
+		boolean result = false;
+		Path path = Paths.get(".");
+		App.generateCSV(path, 5);
 
-		assertTrue(true);
+		File file = new File("Genesys.csv");
+		if (file.exists() && file.isFile()) {
+			result = true;
+		}
+
+		assertEquals(true, result);
 	}
 
 }

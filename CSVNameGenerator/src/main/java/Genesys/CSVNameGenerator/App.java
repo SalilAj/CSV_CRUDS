@@ -15,6 +15,26 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class App {
 
+	public static void generateCSV(Path path, int entries) {
+
+		try {
+
+			FileWriter fileWriter = new FileWriter(path.toString() + "/Genesys.csv");
+
+			fileWriter.append("firstName,lastName,age");
+
+			//call random name generator
+			fileWriter.close();
+
+			System.out.println("done!");
+
+		} catch (IOException e) {
+			System.out.println("Path doesnot exist. Please input a correct Path. Program Exiting... \n");
+			return;
+		}
+		return;
+	}
+
 	public static void main(String[] args) {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -47,6 +67,6 @@ public class App {
 			return;
 		}
 
-		//Call Name generator
+		generateCSV(path, entries);
 	}
 }
