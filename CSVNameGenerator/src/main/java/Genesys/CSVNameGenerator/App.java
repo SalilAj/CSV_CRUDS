@@ -17,13 +17,46 @@ public class App {
 
 	public static void generateCSV(Path path, int entries) {
 
+		final String FILE_HEADER = "firstName,lastName,age";
+		final String NEW_LINE_SEPARATOR = "\n";
+		final String COMMA_DELIMITER = ",";
+
+		StringBuffer sbFirstName = new StringBuffer();
+		char fname = 'a';
+		char lname = 'a';
+		int randomAge;
+
 		try {
 
 			FileWriter fileWriter = new FileWriter(path.toString() + "/Genesys.csv");
 
-			fileWriter.append("firstName,lastName,age");
+			fileWriter.append(FILE_HEADER);
+			fileWriter.append(NEW_LINE_SEPARATOR);
 
-			//call random name generator
+			for (int i = 0; i < entries; i++) {
+
+				fileWriter.append(sbFirstName.toString() + fname);
+				fileWriter.append(COMMA_DELIMITER);
+
+				fileWriter.append(lname);
+				fileWriter.append(COMMA_DELIMITER);
+
+				randomAge = ThreadLocalRandom.current().nextInt(1, 99 + 1);
+				fileWriter.append(String.valueOf(randomAge));
+				fileWriter.append(NEW_LINE_SEPARATOR);
+
+				fname++;
+				lname++;
+
+				if (fname > 122) {
+					fname = 97;
+					sbFirstName.append(fname);
+				}
+				if (lname > 122) {
+					lname = 97;
+				}
+
+			}
 			fileWriter.close();
 
 			System.out.println("done!");
