@@ -48,10 +48,12 @@ public class App {
 				fname++;
 				lname++;
 
+				//if first name reaches 'z', set to 'a' again while pre-pending 'a' to the String buffer
 				if (fname > 122) {
 					fname = 97;
 					sbFirstName.append(fname);
 				}
+				//if last name reaches 'z', set to 'a' again
 				if (lname > 122) {
 					lname = 97;
 				}

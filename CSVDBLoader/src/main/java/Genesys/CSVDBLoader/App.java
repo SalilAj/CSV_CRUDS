@@ -29,19 +29,14 @@ public class App {
 			CSVReader csvReader = new CSVReader(filereader);
 
 			String[] nextRecord;
-			if (csvReader.readNext() != null) {
+			String[] headerRecord;
+			
+			//read each row of the csv, form a document and insert into mongoDB
+			if ((headerRecord = csvReader.readNext()) != null) {
 				while ((nextRecord = csvReader.readNext()) != null) {
 					DBObject person = new BasicDBObject();
-					int columnNumber = 1;
-					for (String cell : nextRecord) {
-						if (columnNumber == 1) {
-							person.put("firstName", cell);
-						} else if (columnNumber == 2) {
-							person.put("lastName", cell);
-						} else if (columnNumber == 3) {
-							person.put("age", cell);
-						}
-						columnNumber++;
+					for (int i = 0; i < nextRecord.length; i++) {
+						person.put(headerRecord[i], nextRecord[i]);
 					}
 					collection.insert(person);
 				}
